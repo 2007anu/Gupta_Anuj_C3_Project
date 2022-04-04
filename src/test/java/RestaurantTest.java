@@ -5,6 +5,8 @@ import java.time.Clock;
 import java.time.Instant;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -45,6 +47,28 @@ class RestaurantTest {
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<OPEN/CLOSED>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+    //<<<<<<<<<<<<<<<<<<<<<<<<<Total Order Cost>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    @Test
+    public void get_total_order_cost_if_menu_contains_items_more_than_one(){
+        //WRITE UNIT TEST CASE HERE
+        restaurant = buildRestaurantData();
+        List<String> itemList = new ArrayList<String>();
+        itemList.add("Sweet corn soup");
+        itemList.add("Vegetable lasagne");
+        assertEquals(388,restaurant.getTotalOrderCost(itemList));
+    }
+
+    @Test
+    public void get_total_order_cost_if_menu_contains_zero_items() throws itemNotFoundException {
+        //WRITE UNIT TEST CASE HERE
+        restaurant = buildRestaurantData();
+        restaurant.removeFromMenu("Sweet corn soup");
+        restaurant.removeFromMenu("Vegetable lasagne");
+        List<String> itemList = new ArrayList<String>();
+        assertEquals(0,restaurant.getTotalOrderCost(itemList));
+    }
+
+    //<<<<<<<<<<<<<<<<<<<<<<<<<Total Order Cost>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>MENU<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     @Test
