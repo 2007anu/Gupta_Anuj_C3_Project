@@ -45,6 +45,27 @@ class RestaurantTest {
         assertEquals(false,  restaurantSpy.isRestaurantOpen());
     }
 
+    @Test
+    public void is_restaurant_open_should_return_false_if_time_is_equal_to_closing_time(){
+        restaurant = buildRestaurantData();
+        Restaurant restaurantSpy = Mockito.spy(restaurant);
+        Clock clock = Clock.fixed(Instant.parse("2022-04-02T22:00:00.00Z"), ZoneId.of("UTC"));
+        LocalTime dateTime = LocalTime.now(clock);
+        Mockito.when(restaurantSpy.getCurrentTime()).thenReturn(dateTime);
+        assertEquals(false,  restaurantSpy.isRestaurantOpen());
+    }
+
+    @Test
+    public void is_restaurant_open_should_return_true_if_time_is_equal_to_opening_time(){
+        restaurant = buildRestaurantData();
+        Restaurant restaurantSpy = Mockito.spy(restaurant);
+        Clock clock = Clock.fixed(Instant.parse("2022-04-02T10:30:00.00Z"), ZoneId.of("UTC"));
+        LocalTime dateTime = LocalTime.now(clock);
+        Mockito.when(restaurantSpy.getCurrentTime()).thenReturn(dateTime);
+        assertEquals(true,  restaurantSpy.isRestaurantOpen());
+    }
+
+
     //<<<<<<<<<<<<<<<<<<<<<<<<<OPEN/CLOSED>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<Total Order Cost>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

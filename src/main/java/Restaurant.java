@@ -69,6 +69,19 @@ public class Restaurant {
         return name;
     }
 
+    public int getTotalOrderCost(List<String> itemList){
+        int totalOrderCost = 0;
+        for(String itemName: itemList){
+            Item item = findItemByName(itemName);
+            if(item !=null)
+                totalOrderCost += item.getPrice();
+            else
+                totalOrderCost+= 0;
+        }
+        System.out.println("Your order will cost:"+totalOrderCost);
+        return totalOrderCost;
+    }
+
     @Override
     public boolean equals(Object o){
         if(o!=null && o instanceof Restaurant){
